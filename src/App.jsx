@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import Write from "./pages/Write/Write";
+import Read from "./pages/Read/Read";
 
 function App() {
   return (
