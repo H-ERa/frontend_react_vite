@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   z-index: 50;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 20px -5px rgba(70, 55, 150, 0.08), 0 1.5px 3px rgba(0,0,0,0.07);
   transition: background 0.2s;
 }
@@ -47,7 +47,7 @@
 
 .navbar-link {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #22223b;
   letter-spacing: 0.06em;
   text-decoration: none;
