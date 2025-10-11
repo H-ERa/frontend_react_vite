@@ -4,7 +4,7 @@ const fontOptions = [
   { label: "Default (IM Fell English)", value: "'IM Fell English', serif" },
   { label: "Dancing Script", value: "'Dancing Script', cursive" },
   { label: "Great Vibes", value: "'Great Vibes', cursive" },
-  { label: "Sacramento", value: "'Sacramento', cursive" }
+  { label: "Parisienne", value: "'Parisienne', cursive" }
 ];
 
 export default function Write() {
