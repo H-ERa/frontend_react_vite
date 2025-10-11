@@ -14,12 +14,10 @@ export default function Write() {
   const [letterId, setLetterId] = useState("");
   const [error, setError] = useState("");
 
-  // (If you need to encrypt in frontend, add it here; else skip)
   const handleSeal = async () => {
     setLetterId("");
     setError("");
     try {
-      // For now, just send raw text as encrypted_message
       const res = await fetch(`${import.meta.env.VITE_API_URL}/letters`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
