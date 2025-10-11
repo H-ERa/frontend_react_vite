@@ -1,25 +1,17 @@
-import { useState } from 'react'
 import './App.css'
 
 import { Navbar } from './components/Navbar';
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <Navbar />
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <Navbar />
+      <div className="pt-16"> {/* pt-16 = same height as navbar */}
+        {/* rest of your page */}
       </div>
     </>
-  )
+  );
 }
 
 export default App

@@ -30,6 +30,11 @@ body {
   min-height: 100vh;
 }
 
+body, html {
+  font-family: 'IM Fell English', serif;
+}
+
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
