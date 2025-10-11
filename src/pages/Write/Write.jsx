@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const fontOptions = [
   { label: "Default (IM Fell English)", value: "'IM Fell English', serif" },
@@ -10,34 +10,33 @@ const fontOptions = [
 export default function Write() {
   const [font, setFont] = useState(fontOptions[0].value);
   const [text, setText] = useState("");
-  const [msg, setMsg] = useState("");
-  const [encrypted, setEncrypted] = useState("");
+  const [letterId, setLetterId] = useState("");
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/hello`)
-      .then((res) => res.json())
-      .then((data) => setMsg(data.message))
-      .catch(() => setMsg(" "));
-  }, []);
-
-  const handleSeal = () => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/encrypt`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    })
-      .then((res) => res.json())
-      .then((data) => setEncrypted(data.encrypted))
-      .catch(() => setEncrypted("Failed to seal/encrypt letter."));
+  // (If you need to encrypt in frontend, add it here; else skip)
+  const handleSeal = async () => {
+    setLetterId("");
+    setError("");
+    try {
+      // For now, just send raw text as encrypted_message
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/letters`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ encrypted_message: text }),
+      });
+      const data = await res.json();
+      if (res.ok && data.id) {
+        setLetterId(data.id);
+      } else {
+        setError(data.error || "Failed to store letter.");
+      }
+    } catch (err) {
+      setError("Network or server error.");
+    }
   };
 
   return (
     <div style={{ maxWidth: 700, margin: "0 auto", padding: 32 }}>
-      {msg && (
-        <div style={{ marginBottom: 24, fontWeight: 500, color: "#7345A0" }}>
-          {msg}
-        </div>
-      )}
       <label style={{ display: "block", marginBottom: 8, fontWeight: 600 }}>
         Choose your letter font:
       </label>
@@ -83,10 +82,11 @@ export default function Write() {
           boxShadow: "0 2px 10px #7345A033",
         }}
         onClick={handleSeal}
+        disabled={!text.trim()}
       >
         Seal Letter
       </button>
-      {encrypted && (
+      {letterId && (
         <div
           style={{
             marginTop: 16,
@@ -98,9 +98,15 @@ export default function Write() {
             wordBreak: "break-word",
           }}
         >
-          <b>Sealed Letter:</b> <br />
-          {encrypted}
+          <b>Your letter code:</b>
+          <br />
+          <span style={{ fontSize: 24 }}>{letterId}</span>
+          <br />
+          <small>Share this code to let your friend read your letter. 🕰️</small>
         </div>
+      )}
+      {error && (
+        <div style={{ color: "#a00", marginTop: 12 }}>{error}</div>
       )}
     </div>
   );
