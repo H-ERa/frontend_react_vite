@@ -7,11 +7,16 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
+    // const targetElem = document.getElementById("color-mode");
+    // targetElem.style.height = "100vh";
+    // targetElem.style.width = "100vh";
 
     if (dark) {
       document.body.style.backgroundImage = "url('/spy_bg.png')";
+      // targetElem.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
     } else {
       document.body.style.backgroundImage = "url('/civilian_bg.png')";
+      // targetElem.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
     }
 
     document.body.style.backgroundSize = "cover";
@@ -19,6 +24,12 @@ export default function ThemeToggle() {
     document.body.style.backgroundPosition = "center";
     document.body.style.margin = "0";
     document.body.style.height = "100vh";
+
+    // return () => {
+    //   targetElem.style.height = "";
+    //   targetElem.style.width = "";
+    //   targetElem.style.backgroundColor = "";
+    // }
   }, [dark]);
 
   return (

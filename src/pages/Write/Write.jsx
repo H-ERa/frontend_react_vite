@@ -8,11 +8,12 @@ const fontOptions = [
   { label: "Parisienne", value: "'Parisienne', cursive" },
 ];
 
-export default function Write() {
+export default function Write(props) {
   const [font, setFont] = useState(fontOptions[0].value);
   const [text, setText] = useState("");
   const [letterId, setLetterId] = useState("");
   const [error, setError] = useState("");
+  const mode = props.mode || "light";
 
   const handleSeal = async () => {
     setLetterId("");
@@ -35,7 +36,7 @@ export default function Write() {
   };
 
   return (
-    <div style = {{height: "100vh", width: "100vw", backgroundColor: "rgba(255, 255, 255, 0.3)"}}>
+    <div className="dark-mode">
       <div style={{ maxWidth: 400, position: "absolute", left: "100px", top: "50px", padding: 32 }}>
       <label style={{ display: "block", marginBottom: 8, fontWeight: 600 }}>
         Choose your letter font:
