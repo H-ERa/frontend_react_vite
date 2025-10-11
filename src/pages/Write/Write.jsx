@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import.meta.env.VITE_API_URL;
 
 const fontOptions = [
   { label: "Default (IM Fell English)", value: "'IM Fell English', serif" },
@@ -12,7 +11,7 @@ export default function Write() {
   const [font, setFont] = useState(fontOptions[0].value);
   const [text, setText] = useState("");
   const [msg, setMsg] = useState("");
-  const [encrypted, setEncrypted] = useState('');
+  const [encrypted, setEncrypted] = useState("");
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/hello`)
@@ -83,10 +82,26 @@ export default function Write() {
           cursor: "pointer",
           boxShadow: "0 2px 10px #7345A033",
         }}
-        onClick={() => alert("Sealed.")}
+        onClick={handleSeal}
       >
         Seal Letter
       </button>
+      {encrypted && (
+        <div
+          style={{
+            marginTop: 16,
+            padding: 16,
+            background: "#f4f1fa",
+            borderRadius: 8,
+            border: "1px solid #e2d7f5",
+            color: "#7345A0",
+            wordBreak: "break-word",
+          }}
+        >
+          <b>Sealed Letter:</b> <br />
+          {encrypted}
+        </div>
+      )}
     </div>
   );
 }
