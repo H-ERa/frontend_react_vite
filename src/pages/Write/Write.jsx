@@ -33,19 +33,15 @@ export default function Write() {
   };
 
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", padding: 32 }}>
-      {msg && (
-        <div style={{ marginBottom: 24, fontWeight: 500, color: "#7345A0" }}>
-          {msg}
-        </div>
-      )}
-      <label style={{ display: "block", marginBottom: 8, fontWeight: 600 }}>
-        Choose your letter font:
-      </label>
+    <div className="write-container">
+      {msg && <div className="write-label">{msg}</div>}
+
+      <label className="write-label">Choose your letter font:</label>
+
       <select
         value={font}
         onChange={(e) => setFont(e.target.value)}
-        style={{ marginBottom: 24, fontSize: 16, padding: 8 }}
+        className="write-select"
       >
         {fontOptions.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -53,52 +49,22 @@ export default function Write() {
           </option>
         ))}
       </select>
+
       <textarea
         rows={10}
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Write your letter here..."
-        style={{
-          width: "100%",
-          fontSize: 18,
-          fontFamily: font,
-          padding: 16,
-          borderRadius: 8,
-          border: "1.5px solid #ccc",
-          background: "#f8f8f8",
-          marginTop: 8,
-        }}
+        className="write-textarea"
+        style={{ fontFamily: font }}
       />
-      <button
-        style={{
-          marginTop: 24,
-          padding: "12px 32px",
-          background: "#7345A0",
-          color: "#fff",
-          border: "none",
-          borderRadius: 10,
-          fontSize: 18,
-          fontWeight: 600,
-          letterSpacing: 1,
-          cursor: "pointer",
-          boxShadow: "0 2px 10px #7345A033",
-        }}
-        onClick={handleSeal}
-      >
+
+      <button className="seal-button" onClick={handleSeal}>
         Seal Letter
       </button>
+
       {encrypted && (
-        <div
-          style={{
-            marginTop: 16,
-            padding: 16,
-            background: "#f4f1fa",
-            borderRadius: 8,
-            border: "1px solid #e2d7f5",
-            color: "#7345A0",
-            wordBreak: "break-word",
-          }}
-        >
+        <div className="sealed-letter">
           <b>Sealed Letter:</b> <br />
           {encrypted}
         </div>
