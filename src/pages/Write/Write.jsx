@@ -38,7 +38,7 @@ export default function Write(props) {
   return (
     <div className="dark-mode">
       <div style={{ maxWidth: 400, position: "absolute", left: "100px", top: "50px", padding: 32 }}>
-      <label style={{ display: "block", marginBottom: 8, fontWeight: 600 }}>
+      <label style={{ display: "block", marginBottom: 8, fontWeight: 600, color: "#ffffff" }}>
         Choose your letter font:
       </label>
       <select
