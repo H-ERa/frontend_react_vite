@@ -35,7 +35,8 @@ export default function Write() {
   };
 
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", padding: 32 }}>
+    <div style = {{height: "100vh", width: "100vw", backgroundColor: "rgba(255, 255, 255, 0.3)"}}>
+      <div style={{ maxWidth: 400, position: "absolute", left: "100px", top: "50px", padding: 32 }}>
       <label style={{ display: "block", marginBottom: 8, fontWeight: 600 }}>
         Choose your letter font:
       </label>
@@ -51,7 +52,7 @@ export default function Write() {
         ))}
       </select>
 
-      <textarea
+=       <textarea
         rows={10}
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -100,6 +101,7 @@ export default function Write() {
       {error && (
         <div style={{ color: "#a00", marginTop: 12 }}>{error}</div>
       )}
+    </div>
     </div>
   );
 }
