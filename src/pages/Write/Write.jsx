@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import "./Write.css";
 
 const fontOptions = [
   { label: "Default (IM Fell English)", value: "'IM Fell English', serif" },

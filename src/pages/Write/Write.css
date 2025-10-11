@@ -1,0 +1,56 @@
+.write-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.write-label {
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.write-select {
+  margin-bottom: 32px;
+  font-size: 18px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.write-textarea {
+  width: 90%;
+  max-width: 900px;
+  height: 500px;
+  font-size: 20px;
+  padding: 40px 60px;
+  border-radius: 12px;
+  border: 2px solid #d3b185;
+  background-image: url("/parchment.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #3b2f1e;
+  line-height: 1.6;
+  resize: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .write-textarea {
+    width: 95%;
+    height: 400px;
+    padding: 24px;
+    font-size: 18px;
+  }
+
+  .write-select {
+    width: 80%;
+    font-size: 16px;
+  }
+}
