@@ -1,32 +1,42 @@
 .write-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: center;       /* 중앙 정렬 (가로) */
+  justify-content: center;   /* 중앙 정렬 (세로) */
+  width: 100%;
   min-height: 100vh;
-  padding: 32px;
+  padding: 40px 0;
+  box-sizing: border-box;
 }
 
 .write-label {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
+  text-align: center;
 }
 
 .write-select {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   font-size: 18px;
-  padding: 10px 16px;
+  padding: 10px 18px;
   border-radius: 8px;
   border: 1.5px solid #ccc;
   background-color: #fff;
   cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.write-select:hover {
+  border-color: #bfa86b;
 }
 
 .write-textarea {
-  width: 90%;
+  display: block;
+  width: 80%;
   max-width: 900px;
-  height: 500px;
+  height: 400px;  /* ✨ 높이 줄임 (이전 600px → 400px) */
   font-size: 20px;
   padding: 40px 60px;
   border-radius: 12px;
@@ -34,23 +44,58 @@
   background-image: url("/parchment.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center center;
+  background-color: #fdfbf5;
   color: #3b2f1e;
-  line-height: 1.6;
+  line-height: 1.8;
   resize: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  font-family: 'IM Fell English', serif;
+  margin: 0 auto;  /* ✨ textarea 자체도 중앙 정렬 */
 }
 
 @media (max-width: 768px) {
   .write-textarea {
-    width: 95%;
-    height: 400px;
+    width: 90%;
+    height: 320px;
     padding: 24px;
     font-size: 18px;
   }
 
   .write-select {
-    width: 80%;
+    width: 85%;
     font-size: 16px;
   }
+}
+
+.seal-button {
+  margin-top: 24px;
+  padding: 12px 32px;
+  background: #7345a0;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px #7345a033;
+  transition: 0.3s ease;
+}
+
+.seal-button:hover {
+  background: #8e5ccc;
+}
+
+.sealed-letter {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f4f1fa;
+  border-radius: 8px;
+  border: 1px solid #e2d7f5;
+  color: #7345a0;
+  word-break: break-word;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }

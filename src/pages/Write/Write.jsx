@@ -42,7 +42,7 @@ export default function Write() {
       <select
         value={font}
         onChange={(e) => setFont(e.target.value)}
-        style={{ marginBottom: 24, fontSize: 16, padding: 8 }}
+        className="write-select"
       >
         {fontOptions.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -50,21 +50,14 @@ export default function Write() {
           </option>
         ))}
       </select>
+
       <textarea
         rows={10}
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Write your letter here..."
-        style={{
-          width: "100%",
-          fontSize: 18,
-          fontFamily: font,
-          padding: 16,
-          borderRadius: 8,
-          border: "1.5px solid #ccc",
-          background: "#f8f8f8",
-          marginTop: 8,
-        }}
+        className="write-textarea"
+        style={{ fontFamily: font }}
       />
       <button
         style={{
