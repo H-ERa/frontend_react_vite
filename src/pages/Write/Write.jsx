@@ -65,7 +65,7 @@ export default function Write(props) {
         style={{
           marginTop: 24,
           padding: "12px 32px",
-          background: "#7345A0",
+          background: "darkred",
           color: "#fff",
           border: "none",
           borderRadius: 10,
