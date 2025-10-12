@@ -20,7 +20,7 @@ export default function Write(props) {
     setLetterId("");
     setError("");
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/letters`, {
+      const res = await fetch(`http://localhost:4000/letters`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ encrypted_message: text }),
