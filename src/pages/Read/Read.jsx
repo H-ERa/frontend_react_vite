@@ -53,13 +53,11 @@ export default function Read() {
   const handleBurn = async () => {
     setIsBurning(true);
 
-    // Call backend to delete the letter
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/letters/${code}`, {
         method: "DELETE",
       });
     } catch (err) {
-      // Ignore network error (still burn UI), but you may want to notify in production
       console.error("Failed to delete letter on backend", err);
     }
 
