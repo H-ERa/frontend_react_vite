@@ -33,9 +33,14 @@
   color: black;
 }
 
+.navbar-logo:hover {
+  color: white;
+  transition: color 0.2s;
+}
+
 
 .navbar.dark .navbar-logo {
-  color: #c7bfff;
+  color: white;
 }
 
 .navbar-links {
@@ -55,12 +60,12 @@
 }
 
 .navbar-link:hover {
-  color: #7c3aed;
+  color: white;
 }
 
 .navbar.dark .navbar-link,
 .navbar.dark .navbar-link:hover {
-  color: #f3e8ff;
+  color: white;
 }
 
 .navbar-toggle {
