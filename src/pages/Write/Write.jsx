@@ -65,7 +65,7 @@ export default function Write(props) {
         style={{
           marginTop: 24,
           padding: "12px 32px",
-          background: "#7345A0",
+          background: "#5e0606",
           color: "#fff",
           border: "none",
           borderRadius: 10,
@@ -88,7 +88,7 @@ export default function Write(props) {
             background: "#f4f1fa",
             borderRadius: 8,
             border: "1px solid #e2d7f5",
-            color: "#7345A0",
+            color: "#5e0606",
             wordBreak: "break-word",
           }}
         >

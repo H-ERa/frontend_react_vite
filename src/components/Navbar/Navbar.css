@@ -35,7 +35,7 @@
 
 
 .navbar.dark .navbar-logo {
-  color: #c7bfff;
+  color: #5e0606;
 }
 
 .navbar-links {
@@ -55,7 +55,7 @@
 }
 
 .navbar-link:hover {
-  color: #7c3aed;
+  color: #5e0606;
 }
 
 .navbar.dark .navbar-link,

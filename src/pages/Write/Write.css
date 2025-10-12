@@ -85,7 +85,7 @@
 .seal-button {
   margin-top: 24px;
   padding: 12px 32px;
-  background: #7345a0;
+  background: #5e0606;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -98,7 +98,7 @@
 }
 
 .seal-button:hover {
-  background: #8e5ccc;
+  background: #5e0606;
 }
 
 .sealed-letter {
@@ -107,7 +107,7 @@
   background: #f4f1fa;
   border-radius: 8px;
   border: 1px solid #e2d7f5;
-  color: #7345a0;
+  color: #5e0606;
   word-break: break-word;
   max-width: 900px;
   margin-left: auto;
