@@ -19,7 +19,9 @@ export default function Read() {
     }
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/letters/${code}`);
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/letters/${code}`
+      );
       if (!res.ok) {
         alert("No letter found for this code.");
         return;
@@ -48,13 +50,23 @@ export default function Read() {
   const isOpening = stage === "opening";
   const isLetter = stage === "letter";
 
-
-  const handleBurn = () => {
+  const handleBurn = async () => {
     setIsBurning(true);
+
+    // Call backend to delete the letter
+    try {
+      await fetch(`${import.meta.env.VITE_API_URL}/letters/${code}`, {
+        method: "DELETE",
+      });
+    } catch (err) {
+      // Ignore network error (still burn UI), but you may want to notify in production
+      console.error("Failed to delete letter on backend", err);
+    }
+
     setTimeout(() => {
       setIsGone(true);
       setIsBurning(false);
-    }, 4000);   
+    }, 4000);
   };
 
   const handleReturnHome = () => {
@@ -63,13 +75,13 @@ export default function Read() {
     setStage("idle");
     setIsGone(false);
   };
-  
+
   return (
-    <div 
-    style={{
+    <div
+      style={{
         position: "fixed",
-        width: "100vw",           // ✅ 视口宽度
-        height: "100vh", 
+        width: "100vw", // ✅ 视口宽度
+        height: "100vh",
         overflow: "hidden",
         // 🔥 背景切换逻辑
         background: isBurning
@@ -79,83 +91,82 @@ export default function Read() {
         top: "66px",
         left: "0px",
       }}
-      >
+    >
       {/* Top-left hint text */}
-        {isIdle && (
-            <div
-            style={{
-                position: "absolute",
-                top: "0px",
-                left: "300px",
-                fontSize: "18px",
-                color: "rgba(0,0,0,0.5)",
-                zIndex: 20,
-            }}
-            >
-            Click the wax seal to open the letter
-            </div>
-        )}
+      {isIdle && (
+        <div
+          style={{
+            position: "absolute",
+            top: "0px",
+            left: "300px",
+            fontSize: "18px",
+            color: "rgba(0,0,0,0.5)",
+            zIndex: 20,
+          }}
+        >
+          Click the wax seal to open the letter
+        </div>
+      )}
 
-        {/* 信封容器 - 始终存在，但根据阶段显示不同内容 */}
-        {!isLetter && (
+      {/* 信封容器 - 始终存在，但根据阶段显示不同内容 */}
+      {!isLetter && (
+        <div
+          className="envelope-container"
+          onTransitionEnd={handleEnvelopeTransitionEnd}
+          style={{
+            backgroundImage: `url(${envelopeImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            width: "67vw",
+            height: "60vh",
+            margin: "auto",
+            marginTop: "5vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "12px",
+            boxShadow: "0 0 20px rgba(0,0,0,0.3)",
+            position: "relative",
+            zIndex: 10,
+            // 动画控制
+            transform: isOpening ? "rotateX(90deg)" : "none",
+            opacity: isOpening ? 0 : 1,
+            transition: "transform 0.8s ease-in-out, opacity 0.8s ease-in-out",
+            // 当显示信件内容时隐藏信封容器
+            //visibility: isLetter ? "hidden" : "visible",
+          }}
+        >
+          {/* 蜡封 (仅在idle阶段可点击) */}
+          {isIdle && (
             <div
-                className="envelope-container"
-                onTransitionEnd={handleEnvelopeTransitionEnd}
-                style={{
-                backgroundImage: `url(${envelopeImg})`,
-                backgroundSize: "cover",
+              onClick={handleSealClick}
+              style={{
+                width: "450px",
+                height: "450px",
+                backgroundImage: "url('/wax_seal_dark_4.png')",
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-                width: "67vw",
-                height: "60vh",
-                margin: "auto",
-                marginTop: "5vh",
+                cursor: "pointer",
+                transition: "transform 0.2s ease, filter 0.2s ease",
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
                 alignItems: "center",
-                borderRadius: "12px",
-                boxShadow: "0 0 20px rgba(0,0,0,0.3)",
-                position: "relative",
-                zIndex: 10,
-                // 动画控制
-                transform: isOpening ? "rotateX(90deg)" : "none",
-                opacity: isOpening ? 0 : 1,
-                transition: "transform 0.8s ease-in-out, opacity 0.8s ease-in-out",
-                // 当显示信件内容时隐藏信封容器
-                //visibility: isLetter ? "hidden" : "visible",
-                }}
-            >
-                {/* 蜡封 (仅在idle阶段可点击) */}
-                {isIdle && (
-                <div
-                    onClick={handleSealClick}
-                    style={{
-                        width: "450px",
-                        height: "450px",
-                        backgroundImage: "url('/wax_seal_dark_4.png')",
-                        backgroundSize: "contain",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                        cursor: "pointer",
-                        transition: "transform 0.2s ease, filter 0.2s ease",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        userSelect: "none",
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = "scale(1.05)";
-                        e.currentTarget.style.filter = "brightness(1.1)";
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = "scale(1)";
-                        e.currentTarget.style.filter = "brightness(1)";
-                    }}
-                ></div>
-
-                )}
-            </div>
-        )}
+                justifyContent: "center",
+                userSelect: "none",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.05)";
+                e.currentTarget.style.filter = "brightness(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.filter = "brightness(1)";
+              }}
+            ></div>
+          )}
+        </div>
+      )}
 
       {/* 信件内容 (在信封消失后显示) */}
       {isLetter && !isGone && (
@@ -170,14 +181,15 @@ export default function Read() {
             borderRadius: "12px",
             padding: "30px",
             overflowY: "auto",
-            boxShadow: "inset 0 0 25px rgba(0,0,0,0.25), 0 0 20px rgba(0,0,0,0.3)",
+            boxShadow:
+              "inset 0 0 25px rgba(0,0,0,0.25), 0 0 20px rgba(0,0,0,0.3)",
             textAlign: "center",
             fontFamily: "'Times New Roman', serif",
             color: "#3b2f2f",
             //opacity: 0,
             animation: isBurning
-                ? "burnUp 3s forwards ease-in-out" // 🔥 
-                : "fadeIn 2s forwards ease-in-out",
+              ? "burnUp 3s forwards ease-in-out" // 🔥
+              : "fadeIn 2s forwards ease-in-out",
             zIndex: 50,
           }}
         >
