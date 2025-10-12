@@ -41,7 +41,7 @@ export default function Write(props) {
       {/* 30% black overlay only in dark mode */}
       {mode === "dark" && <div className="dark-overlay" />}
       <div className="write-box">
-        <label className="write-label" style={{ color: mode === "dark" ? "#fff" : "#5e0606" }}>
+        <label className="write-label" style={{ color: mode === "dark" ? "#fff" : "#ffff" }}>
           Choose your letter font:
         </label>
         <select
