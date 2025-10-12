@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Write.css";
 
 const fontOptions = [
   { label: "Default (IM Fell English)", value: "'IM Fell English', serif" },
   { label: "Dancing Script", value: "'Dancing Script', cursive" },
-  { label: "Great Vibes", value: "'Great Vibes', cursive" },
-  { label: "Parisienne", value: "'Parisienne', cursive" },
+  { label: "Cedarville Cursive", value: "'Cedarville Cursive', cursive" },
+  { label: "Allura", value: "'Allura', cursive" },
+  { label: "Tangerine", value: "'Tangerine', cursive" },
 ];
 
 export default function Write(props) {
@@ -36,73 +37,56 @@ export default function Write(props) {
   };
 
   return (
-    <div className="dark-mode">
-      <div style={{ maxWidth: 400, position: "absolute", left: "100px", top: "50px", padding: 32 }}>
-      <label style={{ display: "block", marginBottom: 8, fontWeight: 600, color: "#ffffff" }}>
-        Choose your letter font:
-      </label>
-      <select
-        value={font}
-        onChange={(e) => setFont(e.target.value)}
-        className="write-select"
-      >
-        {fontOptions.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
-
-=       <textarea
-        rows={10}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Write your letter here..."
-        className="write-textarea"
-        style={{ fontFamily: font }}
-      />
-      <button
-        style={{
-          marginTop: 24,
-          padding: "12px 32px",
-          background: "#5e0606",
-          color: "#fff",
-          border: "none",
-          borderRadius: 10,
-          fontSize: 18,
-          fontWeight: 600,
-          letterSpacing: 1,
-          cursor: "pointer",
-          boxShadow: "0 2px 10px #7345A033",
-        }}
-        onClick={handleSeal}
-        disabled={!text.trim()}
-      >
-        Seal Letter
-      </button>
-      {letterId && (
-        <div
-          style={{
-            marginTop: 16,
-            padding: 16,
-            background: "#f4f1fa",
-            borderRadius: 8,
-            border: "1px solid #e2d7f5",
-            color: "#5e0606",
-            wordBreak: "break-word",
-          }}
+    <div className={mode === "dark" ? "dark-mode" : "light-mode"}>
+      {/* 30% black overlay only in dark mode */}
+      {mode === "dark" && <div className="dark-overlay" />}
+      <div className="write-box">
+        <label className="write-label" style={{ color: mode === "dark" ? "#fff" : "#5e0606" }}>
+          Choose your letter font:
+        </label>
+        <select
+          value={font}
+          onChange={(e) => setFont(e.target.value)}
+          className="write-select"
         >
-          <b>Your letter code:</b>
-          <br />
-          <span style={{ fontSize: 24 }}>{letterId}</span>
-          <br />
-          <small>Share this code to let your friend read your letter. 🕰️</small>
+          {fontOptions.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+
+        <div className="letter-area">
+          <textarea
+            rows={10}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Write your letter here..."
+            className="write-textarea"
+            style={{ fontFamily: font }}
+          />
+          {letterId && (
+            <div className="sealed-letter-floating">
+              <b>Your letter code:</b>
+              <br />
+              <span style={{ fontSize: 24 }}>{letterId}</span>
+              <br />
+              <small>Share this code to let your friend read your letter. 🕰️</small>
+            </div>
+          )}
         </div>
-      )}
-      {error && (
-        <div style={{ color: "#a00", marginTop: 12 }}>{error}</div>
-      )}
-    </div>
+
+        <button
+          className="seal-button"
+          onClick={handleSeal}
+          disabled={!text.trim()}
+        >
+          Seal Letter
+        </button>
+        {error && (
+          <div style={{ color: "#a00", marginTop: 12 }}>{error}</div>
+        )}
+      </div>
     </div>
   );
 }
