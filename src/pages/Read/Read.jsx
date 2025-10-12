@@ -19,7 +19,7 @@ export default function Read() {
     }
 
     try {
-      const res = await fetch(`http://localhost:4000/letters/${code}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/letters/${code}`);
       if (!res.ok) {
         alert("No letter found for this code.");
         return;
